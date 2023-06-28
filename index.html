@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>shared-worker</h1>
+    <script>
+      const worker = new SharedWorker("/shared-worker.js");
+      const port = worker.port;
+      port.onmessage = (ev) => {
+        console.log("我是主线程，我收到了来自子线程的消息", ev.data);
+      };
+      port.postMessage('我是主线程，我发个init消息')
+    </script>
+  </body>
+</html>
